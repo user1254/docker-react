@@ -1,0 +1,9 @@
+sudo: required  # we need superuser permission in order to execute this build
+services: # install docker for this build
+  - docker
+
+before_install:
+  - docker build -t tookme1hour/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true tookme1hour/docker-react npm run test # ci=true to exit immediately after the tests are executed, by default it stays there waiting for some other input
