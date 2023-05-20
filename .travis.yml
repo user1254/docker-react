@@ -7,3 +7,15 @@ before_install:
 
 script:
   - docker run -e CI=true tookme1hour/docker-react npm run test # ci=true to exit immediately after the tests are executed, by default it stays there waiting for some other input
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "docker-react"
+  env: "Docker-react-env"
+  bucker_name: "elasticbeanstalk-eu-north-1-589619828699"
+  bucket_path: "docker-react"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
